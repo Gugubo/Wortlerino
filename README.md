@@ -32,7 +32,7 @@ Available settings:
 
 ### Example
 
-![Settings Example](https://user-images.githubusercontent.com/29143981/152345004-eeb0ed81-995a-4e29-a5eb-26127c142d7a.png)
+![Settings Example](https://user-images.githubusercontent.com/29143981/152359294-a5ddf2b8-76bb-4759-9566-397764fba836.png)
 
 ## Included word lists
 
