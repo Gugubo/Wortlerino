@@ -1,10 +1,10 @@
 # Wortlerino
 
-Wortlerino is a discord wordle bot.
+Wortlerino is a discord wordle bot. It will create a random word for you to guess. See [Wordle](https://www.powerlanguage.co.uk/wordle/) for the rules.
 
 ## Features
 
-- You can use different word lists and change them while the bot is running
+- You can use multiple different word lists and change them while the bot is running
 - You can use separate word lists for generating a word and for words that you're allowed to guess (like the real Wordle)
 - You can change the length of generated words
 
@@ -12,7 +12,7 @@ Wortlerino is a discord wordle bot.
 
 Type `wortlerino`, `new`, or `n` to create a new game.
 
-Type `word`, `guess`, or `w` followed by a guess. See [Wordle](https://www.powerlanguage.co.uk/wordle/) for the rules.
+Type `word`, `guess`, or `w` followed by a guess.
 
 After guessing the right word, start a new game with `next`, `again`, or `n`. (Or use any of the other keywords, they all work the same.)
 
