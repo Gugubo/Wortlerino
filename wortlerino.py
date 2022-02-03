@@ -239,7 +239,7 @@ async def on_message(message):
     won, color, response = parse_message(message)
 
     if won is not None:
-        print("Parsed message:", message)
+        print("Parsed message:", message.content)
         if won:
             await send_embed(
                 message.channel,
