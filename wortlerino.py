@@ -75,7 +75,7 @@ def parse_message(message):
                     f"New game started! (Word has {len(wordle_state.game.word)} letters and is from word list {wordle_state.word_list['name']})",
                 )
             except wordle.NoWordsException as ex:
-                return False, COLOR_ERROR, ex
+                return False, COLOR_ERROR, str(ex)
         else:
             return False, COLOR_ERROR, "There's already a game in progress!"
 
@@ -99,7 +99,7 @@ def parse_message(message):
                     f"{parse_word_analysis(result)}\nConfirmed to be in the word: {wordle_state.game.get_letters_definitely_in()}\nNot yet tried: {wordle_state.game.get_letters_not_tried()}\nDefinitely not in the word: {wordle_state.game.get_letters_definitely_out()}",
                 )
         except wordle.InvalidGuessException as ex:
-            return False, COLOR_ERROR, ex
+            return False, COLOR_ERROR, str(ex)
 
     elif number_of_messages == 3:
         # Change some settings
@@ -120,7 +120,7 @@ def parse_message(message):
                     f"Word list has been changed to {split_message[2]}: {wordle.WORD_LISTS[split_message[2].title()]['description']}!",
                 )
             except wordle.InvalidSettingsException as ex:
-                return False, COLOR_ERROR, ex
+                return False, COLOR_ERROR, str(ex)
         elif split_message[1].lower() in [
             "guesslist",
             "guess_list",
@@ -137,7 +137,7 @@ def parse_message(message):
                     f"Guess list has been changed to {split_message[2]}: {wordle.WORD_LISTS[split_message[2].title()]['description']}!",
                 )
             except wordle.InvalidSettingsException as ex:
-                return False, COLOR_ERROR, ex
+                return False, COLOR_ERROR, str(ex)
         elif split_message[1].lower() in [
             "alphabet",
             "letters",
@@ -152,7 +152,7 @@ def parse_message(message):
                     f"Alphabet has been changed to {split_message[2]}: {wordle.LETTERS[split_message[2].title()]['description']}!",
                 )
             except wordle.InvalidSettingsException as ex:
-                return False, COLOR_ERROR, ex
+                return False, COLOR_ERROR, str(ex)
         elif split_message[1] in ["length", "size", "länge", "l"]:
             new_length = split_message[2]
             if not new_length.isnumeric():
@@ -165,7 +165,7 @@ def parse_message(message):
                     f"Length for new words has been set to {new_length}.",
                 )
             except wordle.InvalidSettingsException as ex:
-                return False, COLOR_ERROR, ex
+                return False, COLOR_ERROR, str(ex)
         else:
             return (
                 False,
@@ -188,7 +188,7 @@ def parse_message(message):
                     f"Length for new words has been set to {new_min_length}-{new_max_length}.",
                 )
             except wordle.InvalidSettingsException as ex:
-                return False, COLOR_ERROR, ex
+                return False, COLOR_ERROR, str(ex)
         else:
             return (
                 False,
@@ -239,6 +239,7 @@ async def on_message(message):
     won, color, response = parse_message(message)
 
     if won is not None:
+        print("Parsed message:", message)
         if won:
             await send_embed(
                 message.channel,
