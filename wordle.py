@@ -35,6 +35,12 @@ WORD_LISTS = {
         "description": "All possible wordle words + all words wordle accepts as input",
         "language": "en",
     },
+    "Spelunky": {
+        "name": "Spelunky",
+        "filename": "spelunky.txt",
+        "description": "All words that appear anywhere in Spelunky 2",
+        "language": "en",
+    },
 }
 
 LETTERS = {
@@ -69,7 +75,9 @@ class WordleState:
         """Creates a new game"""
         word = self._get_new_word()
         self.game = WordleGame(
-            word, set(self.valid_letters["letters"]), self.guess_list["words"]
+            word,
+            set(self.valid_letters["letters"]),
+            self.guess_list["words"] + self.word_list["words"],
         )
 
     def _get_new_word(self):
