@@ -55,12 +55,12 @@ class WordleState:
     def __init__(self):
         # Some default values
         self.word_list = WORD_LISTS[
-            "Substantive"
+            "Wordle"
         ]  # The list from which new words are chosen from
         self.guess_list = WORD_LISTS[
-            "German"
+            "Wordle-all"
         ]  # The list of words which are valid to be guessed
-        self.valid_letters = LETTERS["German"]
+        self.valid_letters = LETTERS["English"]
         self.min_length = 4
         self.max_length = 6
         self.game = None

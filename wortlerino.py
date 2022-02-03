@@ -136,6 +136,21 @@ def parse_message(message):
                 )
             except wordle.InvalidSettingsException as ex:
                 return False, COLOR_ERROR, ex
+        elif split_message[1].lower() in [
+            "alphabet",
+            "letters",
+            "buchstaben",
+            "characters",
+        ]:
+            try:
+                wordle_state.set_alphabet(split_message[2])
+                return (
+                    False,
+                    COLOR_CORRECT,
+                    f"Alphabet has been changed to {split_message[2]}: {wordle.LETTERS[split_message[2].title()]['description']}!",
+                )
+            except wordle.InvalidSettingsException as ex:
+                return False, COLOR_ERROR, ex
         elif split_message[1] in ["length", "size", "länge", "l"]:
             new_length = split_message[2]
             if not new_length.isnumeric():
