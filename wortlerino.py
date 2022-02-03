@@ -88,7 +88,7 @@ def parse_message(message):
                     True,
                     COLOR_CORRECT,
                     "\n".join(map(parse_word_analysis, guesses))
-                    + f"\nCongrats! ({len(guesses)} guesses)",
+                    + f"\nCongrats! ({len(guesses)} guess{'es' if len(guesses)>1 else ''})",
                 )
             else:
                 return (
