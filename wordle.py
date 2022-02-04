@@ -41,6 +41,12 @@ WORD_LISTS = {
         "description": "All words that appear anywhere in Spelunky 2",
         "language": "en",
     },
+    "English": {
+        "name": "English",
+        "filename": "english.txt",
+        "description": "A few hundred thousand English words",
+        "language": "en",
+    },
 }
 
 LETTERS = {

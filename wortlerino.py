@@ -210,14 +210,13 @@ def parse_word_analysis(analysis):
     return "".join([conversion.get(s) for s in analysis])
 
 
-async def send_embed(channel, user, title, colour, description, url=None):
+async def send_embed(channel, title, colour, description, url=None):
     """Sends an embed to the specified channel"""
     embed = discord.Embed(
         title=title,
         colour=colour,
         description=description,
     )
-    # embed.set_author(name=user.name, icon_url=user.avatar_url)
     embed.set_footer(text=f"Wortlerino v{VERSION}")
     if url:
         embed.url = url
@@ -243,7 +242,6 @@ async def on_message(message):
         if won:
             await send_embed(
                 message.channel,
-                message.author,
                 wordle_states[message.channel].game.word.upper(),
                 color,
                 response,
@@ -253,7 +251,7 @@ async def on_message(message):
                 + wordle_states[message.channel].game.word.title(),
             )
         else:
-            await send_embed(message.channel, message.author, "", color, response)
+            await send_embed(message.channel, "", color, response)
 
 
 # Start the whole thing

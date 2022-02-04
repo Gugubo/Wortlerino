@@ -26,9 +26,9 @@ Change a setting while the bot is running by typing: `wortlerino setting new_val
 They will come into effect when a new word is generated.
 
 Available settings:
-- word_list: Changes the list from which new words can be generated (default: _Wordle_)
-- guess_list: Changes the list of words which are allowed as guesses (default: _Wordle-all_)
-- length: Changes the length of new words (takes one or two values) (default: _4 - 6_)
+- `word_list`: Changes the list from which new words can be generated (default: _Wordle_)
+- `guess_list`: Changes the list of words which are allowed as guesses (default: _Wordle-all_)
+- `length`: Changes the length of new words (takes one or two values) (default: _4 - 6_)
 
 ### Example
 
@@ -36,17 +36,19 @@ Available settings:
 
 ## Included word lists
 
-- Wordle: All possible wordle words
+- _Wordle_: All possible wordle words
 
-- Wordle-all: All possible wordle words + all words wordle accepts as input
+- _Wordle-all_: All possible wordle words + all words wordle accepts as input
 
-- Wikipedia: List of all German Wikipedia-Article-Titles
+- _Wikipedia_: List of all German Wikipedia-Article-Titles
 
-- Substantive: A list of a few hundred German nouns
+- _Substantive_: A list of a few hundred German nouns
 
-- German: A big word list including inflections (should probably only be used for guesses)
+- _German_: A big word list including inflections (should probably only be used for guesses)
 
-- Spelunky: A list of all words that appear in Spelunky 2
+- _English_: A big word list
+
+- _Spelunky_: A list of all words that appear in Spelunky 2
 
 ## Requirements
 
