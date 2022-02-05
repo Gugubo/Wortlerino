@@ -99,7 +99,7 @@ def parse_message(message):
                 return (
                     False,
                     COLOR_STANDARD,
-                    f"Confirmed to be in the word: {wordle_state.game.get_letters_definitely_in()}\nNot yet tried: {wordle_state.game.get_letters_not_tried()}\nDefinitely not in the word: {wordle_state.game.get_letters_definitely_out()}",
+                    f"Letters you haven't tried: {wordle_state.game.get_letters_not_tried()}",
                     file,
                 )
         except wordle.InvalidGuessException as ex:
