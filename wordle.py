@@ -206,7 +206,6 @@ class WordleGame:
         """Returns which of the letters in the guess are correct,
         in the wrong position, or not in the word"""
 
-        n = len(self.word)
         result = [LetterGuess(c, Guess.INCORRECT) for c in guess]
 
         count = collections.Counter(self.word)

@@ -15,9 +15,9 @@ GAP = 5
 class Color(Enum):
     """Colors for the squares"""
 
-    INCORRECT = "787c7e"
-    WRONG_POSITION = "c9b458"
-    CORRECT = "6aaa64"
+    INCORRECT = "49494d"
+    WRONG_POSITION = "ccb129"
+    CORRECT = "468c3f"
 
 
 def get_dimensions(guesses: List[List[LetterGuess]]):
