@@ -1,6 +1,7 @@
 """Wordle-Bot for discord"""
 
 import discord
+from image_guesses import get_image_from_guesses
 import wordle
 import config
 
@@ -84,19 +85,22 @@ def parse_message(message):
         guess = split_message[1].lower()
         try:
             won, result = wordle_state.game.guess(guess)
+            img = get_image_from_guesses(wordle_state.game.guesses)
+            file = discord.File(img, "guesses.png")
             if won:
                 guesses = wordle_state.game.guesses
                 return (
                     True,
                     COLOR_CORRECT,
-                    "\n".join(map(parse_word_analysis, guesses))
-                    + f"\nCongrats! ({len(guesses)} guess{'es' if len(guesses)>1 else ''})",
+                    f"\nCongrats! ({len(guesses)} guess{'es' if len(guesses)>1 else ''})",
+                    file
                 )
             else:
                 return (
                     False,
                     COLOR_STANDARD,
-                    f"{parse_word_analysis(result)}\nConfirmed to be in the word: {wordle_state.game.get_letters_definitely_in()}\nNot yet tried: {wordle_state.game.get_letters_not_tried()}\nDefinitely not in the word: {wordle_state.game.get_letters_definitely_out()}",
+                    f"Confirmed to be in the word: {wordle_state.game.get_letters_definitely_in()}\nNot yet tried: {wordle_state.game.get_letters_not_tried()}\nDefinitely not in the word: {wordle_state.game.get_letters_definitely_out()}",
+                    file
                 )
         except wordle.InvalidGuessException as ex:
             return False, COLOR_ERROR, str(ex)
@@ -203,14 +207,14 @@ def parse_message(message):
 def parse_word_analysis(analysis):
     """Returns color emojis from word analysis"""
     conversion = {
-        wordle.Letter.WRONG_POSITION: YELLOW,
-        wordle.Letter.CORRECT: GREEN,
-        wordle.Letter.INCORRECT: BLACK,
+        wordle.Guess.WRONG_POSITION: YELLOW,
+        wordle.Guess.CORRECT: GREEN,
+        wordle.Guess.INCORRECT: BLACK,
     }
-    return "".join([conversion.get(s) for s in analysis])
+    return "".join([conversion.get(s.guess) for s in analysis])
 
 
-async def send_embed(channel, title, colour, description, url=None):
+async def send_embed(channel, title, colour, description, url=None, file=None):
     """Sends an embed to the specified channel"""
     embed = discord.Embed(
         title=title,
@@ -220,7 +224,11 @@ async def send_embed(channel, title, colour, description, url=None):
     embed.set_footer(text=f"Wortlerino v{VERSION}")
     if url:
         embed.url = url
-    await channel.send(embed=embed)
+
+    if file is not None:
+        embed.set_image(url=f"attachment://{file.filename}")
+
+    await channel.send(embed=embed, file=file)
 
 
 # Connect
@@ -235,7 +243,10 @@ async def on_ready():
 # When a new message is sent
 @client.event
 async def on_message(message):
-    won, color, response = parse_message(message)
+    file = None
+    won, color, response, *rest = parse_message(message)
+    if rest:
+        file = rest[0]
 
     if won is not None:
         print("Parsed message:", message.content)
@@ -249,9 +260,10 @@ async def on_message(message):
                     "XX", wordle_states[message.channel].word_list["language"]
                 )
                 + wordle_states[message.channel].game.word.title(),
+                file=file
             )
         else:
-            await send_embed(message.channel, "", color, response)
+            await send_embed(message.channel, "", color, response, file=file)
 
 
 # Start the whole thing

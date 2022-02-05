@@ -1,8 +1,9 @@
 """Does wordle stuff"""
 
-from enum import Enum, auto
 import collections
 import random
+
+from wordle_guess import LetterGuess, Guess
 
 WORD_LISTS = {
     "Substantive": {
@@ -176,7 +177,7 @@ class WordleGame:
         self.guessed_letters.update(guess)
         result = self._analyze_guess(guess)
         self.guesses.append(result)
-        self.won = set(result) == {Letter.CORRECT}
+        self.won = set(lg.guess for lg in result) == {Guess.CORRECT}
         return self.won, result
 
     def get_letters_not_tried(self):
@@ -206,30 +207,26 @@ class WordleGame:
         in the wrong position, or not in the word"""
 
         n = len(self.word)
-        result = [Letter.INCORRECT] * n
+        result = [LetterGuess(c, Guess.INCORRECT) for c in guess]
+
         count = collections.Counter(self.word)
 
         # Mark all letters in the right position as green
         for i, c in enumerate(guess):
             if self.word[i] == c:
-                result[i] = Letter.CORRECT
+                result[i] = LetterGuess(c, Guess.CORRECT)
                 count[c] -= 1
 
         # Mark letters in wrong position yellow
         for i, c in enumerate(guess):
-            if result[i] == Letter.INCORRECT and count[c] > 0:
-                result[i] = Letter.WRONG_POSITION
+            if result[i].guess == Guess.INCORRECT and count[c] > 0:
+                result[i] = LetterGuess(c, Guess.WRONG_POSITION)
                 count[c] -= 1
 
         return result
 
 
-class Letter(Enum):
-    """Used to give feedback on a guess"""
 
-    CORRECT = auto()
-    WRONG_POSITION = auto()
-    INCORRECT = auto()
 
 
 def load_lines(filename):
