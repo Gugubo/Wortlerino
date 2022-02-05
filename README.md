@@ -22,10 +22,11 @@ After guessing the right word, start a new game with `next`, `again`, or `n`. (O
 
 ## Settings
 
-Change a setting while the bot is running by typing: `wortlerino setting new_value`  
+Change a setting while the bot is running by typing: `wortlerino setting new_value`
 They will come into effect when a new word is generated.
 
 Available settings:
+
 - `word_list`: Changes the list from which new words can be generated (default: _Wordle_)
 - `guess_list`: Changes the list of words which are allowed as guesses (default: _Wordle-all_)
 - `length`: Changes the length of new words (takes one or two values) (default: _4 - 6_)
@@ -52,11 +53,14 @@ Available settings:
 
 ## Requirements
 
-You need [discord.py](https://pypi.org/project/discord.py/) and probably Python.
+```
+pip install -r requirements.txt
+```
 
 ## Running it
 
 1. Create a `config.py` with your token in it, for example:
+
 ```python
 TOKEN = "bFqLkmKnVoo7r1Lbc6S41pK3T0Gm1Vz9ZZUua9Y64TfWDV05Aql5DznwRUx"
 ```
@@ -64,4 +68,5 @@ TOKEN = "bFqLkmKnVoo7r1Lbc6S41pK3T0Gm1Vz9ZZUua9Y64TfWDV05Aql5DznwRUx"
 2. Run `wortlerino.py`
 
 ## License
+
 [GPL](https://choosealicense.com/licenses/gpl-3.0/)
