@@ -10,7 +10,7 @@ client = discord.Client()
 TOKEN = config.TOKEN
 
 # Constants
-VERSION = 1.1
+VERSION = 1.2
 
 YELLOW = "🟨"
 GREEN = "🟩"
@@ -211,7 +211,10 @@ async def send_embed(channel, title, color, description, url=None, file=None):
         colour=color,
         description=description,
     )
-    embed.set_footer(text=f"Wortlerino v{VERSION}")
+    length_string = f"{wordle_states[channel].min_length if wordle_states[channel].min_length == wordle_states[channel].max_length else str(wordle_states[channel].min_length) + '-' + str(wordle_states[channel].max_length)}"
+    embed.set_footer(
+        text=f"Wortlerino v{VERSION} - ({wordle_states[channel].word_list['name']}/{wordle_states[channel].guess_list['name']}/{length_string})"
+    )
     if url:
         embed.url = url
 
