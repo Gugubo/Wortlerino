@@ -3,6 +3,7 @@
 import collections
 import random
 
+import config
 from wordle_guess import LetterGuess, Guess
 
 WORD_LISTS = {
@@ -61,6 +62,12 @@ LETTERS = {
     },
 }
 
+DEFAULT_WORD_LIST = "Wordle"
+DEFAULT_GUESS_LIST = "Wordle-all"
+DEFAULT_ALPHABET = "English"
+DEFAULT_MIN_LENGTH = 4
+DEFAULT_MAX_LENGTH = 6
+
 
 class WordleState:
     """State including settings and the current wordle game"""
@@ -68,14 +75,14 @@ class WordleState:
     def __init__(self):
         # Some default values
         self.word_list = WORD_LISTS[
-            "Wordle"
+            DEFAULT_WORD_LIST
         ]  # The list from which new words are chosen from
         self.guess_list = WORD_LISTS[
-            "Wordle-all"
+            DEFAULT_GUESS_LIST
         ]  # The list of words which are valid to be guessed
-        self.valid_letters = LETTERS["English"]
-        self.min_length = 4
-        self.max_length = 6
+        self.valid_letters = LETTERS[DEFAULT_ALPHABET]
+        self.min_length = DEFAULT_MIN_LENGTH
+        self.max_length = DEFAULT_MAX_LENGTH
         self.game = None
 
     def create_game(self):
@@ -238,3 +245,15 @@ for word_list in WORD_LISTS.values():
         map(str.lower, load_lines("wordLists/" + word_list["filename"]))
     )
 print("wordle.py: All word lists loaded")
+
+# Load optional defaults from config
+if hasattr(config, "DEFAULT_WORD_LIST"):
+    DEFAULT_WORD_LIST = config.DEFAULT_WORD_LIST
+if hasattr(config, "DEFAULT_GUESS_LIST"):
+    DEFAULT_GUESS_LIST = config.DEFAULT_GUESS_LIST
+if hasattr(config, "DEFAULT_ALPHABET"):
+    DEFAULT_ALPHABET = config.DEFAULT_ALPHABET
+if hasattr(config, "DEFAULT_MIN_LENGTH"):
+    DEFAULT_MIN_LENGTH = config.DEFAULT_MIN_LENGTH
+if hasattr(config, "DEFAULT_MAX__LENGTH"):
+    DEFAULT_MAX_LENGTH = config.DEFAULT_MAX_LENGTH
