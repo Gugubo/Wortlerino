@@ -115,7 +115,7 @@ class WordleState:
         if min_length < 1:
             raise InvalidSettingsException("Length must be at least 1!")
         if max_length > 20:
-            raise InvalidSettingsException("Length must be smaller than 20.")
+            raise InvalidSettingsException("Length must be 20 or smaller!")
         self.min_length = min_length
         self.max_length = max_length
 
