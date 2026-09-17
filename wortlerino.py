@@ -227,6 +227,8 @@ async def send_embed(channel, title, color, description, url=None, file=None):
 @client.event
 async def on_ready():
     """Connected to discord"""
+    assert client.user is not None
+
     print("Ready.")
     print("Name:", client.user.name)
     print("ID:", client.user.id)
