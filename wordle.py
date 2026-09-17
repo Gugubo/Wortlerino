@@ -2,52 +2,69 @@
 
 import collections
 import random
+from typing import TypedDict
 
 import config
-from wordle_guess import LetterGuess, Guess
+from wordle_guess import Guess, LetterGuess
 
-WORD_LISTS = {
+
+class WordList(TypedDict):
+    name: str
+    filename: str
+    description: str
+    language: str
+    words: list[str]
+
+
+WORD_LISTS: dict[str, WordList] = {
     "Substantive": {
         "name": "Substantive",
         "filename": "substantive.txt",
         "description": "Wenige (~100) deutsche Substantive",
         "language": "de",
+        "words": [],
     },
     "German": {
         "name": "German",
         "filename": "german.txt",
         "description": "Deutsche Wörter (inklusive Flexionen)",
         "language": "de",
+        "words": [],
     },
     "Wikipedia": {
         "name": "Wikipedia",
         "filename": "wiki.txt",
         "description": "Liste der Titel aller deutschen Wikipedia-Artikel",
         "language": "de",
+        "words": [],
     },
     "Wordle": {
         "name": "Wordle",
         "filename": "wordle-answers.txt",
         "description": "All possible wordle words",
         "language": "en",
+        "words": [],
     },
     "Wordle-all": {
         "name": "Wordle-all",
         "filename": "wordle-all.txt",
         "description": "All possible wordle words + all words wordle accepts as input",
         "language": "en",
+        "words": [],
     },
     "Spelunky": {
         "name": "Spelunky",
         "filename": "spelunky.txt",
         "description": "All words that appear anywhere in Spelunky 2",
         "language": "en",
+        "words": [],
     },
     "English": {
         "name": "English",
         "filename": "english.txt",
         "description": "A few hundred thousand English words",
         "language": "en",
+        "words": [],
     },
 }
 
