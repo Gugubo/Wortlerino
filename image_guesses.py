@@ -64,16 +64,15 @@ def get_image_from_guesses(guesses: List[List[LetterGuess]]):
             img_draw.rounded_rectangle(
                 [x0, y0, x1, y1], fill=get_color(guess.guess), radius=roundedness
             )
-            font_width, font_height = img_draw.textsize(
-                guess.letter.upper(), font=IMG_FONT
-            )
+
+            (left, top, right, bottom) = IMG_FONT.getbbox(guess.letter.upper())
+            font_width = right - left
+            font_height = bottom - top
+
             img_draw.text(
                 (
                     x0 + (SQUARE_WIDTH - font_width) / 2,
-                    y0
-                    + (SQUARE_HEIGHT - font_height) / 2
-                    - IMG_FONT.getoffset(guess.letter.upper())[1]
-                    + 8,
+                    y0 + (SQUARE_HEIGHT - font_height) / 2 - top,
                 ),
                 guess.letter.upper(),
                 font=IMG_FONT,
