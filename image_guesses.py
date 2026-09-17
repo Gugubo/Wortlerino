@@ -20,12 +20,12 @@ class Color(Enum):
     CORRECT = "468c3f"
 
 
-def get_dimensions(guesses: List[List[LetterGuess]]):
+def get_dimensions(guesses: List[List[LetterGuess]]) -> tuple[int, int]:
     """Returns dimensions for the image"""
     num_guesses = len(guesses)
 
     if not num_guesses:
-        return None
+        return (0, 0)
 
     word_len = len(guesses[0])
 
@@ -54,7 +54,6 @@ def get_image_from_guesses(guesses: List[List[LetterGuess]]):
 
     for attempt_idx, attempt in enumerate(guesses):
         for guess_idx, guess in enumerate(attempt):
-
             x0 = (guess_idx * SQUARE_WIDTH) + (GAP * (guess_idx)) + GAP
             y0 = (attempt_idx * SQUARE_HEIGHT) + (GAP * (attempt_idx)) + GAP
 
