@@ -125,9 +125,7 @@ class WordleState:
         (correct length, only letters, lowercase or titlecase)"""
         return (
             self.max_length >= len(word) >= self.min_length
-            and all(
-                [letter.lower() in self.valid_letters["letters"] for letter in word]
-            )
+            and all(letter.lower() in self.valid_letters["letters"] for letter in word)
             and word[1:].islower()
         )
 
@@ -201,7 +199,7 @@ class WordleGame:
         self.guessed_letters.update(guess)
         result = self._analyze_guess(guess)
         self.guesses.append(result)
-        self.won = set(lg.guess for lg in result) == {Guess.CORRECT}
+        self.won = {lg.guess for lg in result} == {Guess.CORRECT}
         return self.won
 
     def get_letters_not_tried(self):

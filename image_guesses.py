@@ -1,10 +1,10 @@
 import io
 from enum import Enum
-from typing import List
-from ttf_opensans import opensans
-from PIL import Image, ImageDraw
 
-from wordle_guess import LetterGuess, Guess
+from PIL import Image, ImageDraw
+from ttf_opensans import opensans
+
+from wordle_guess import Guess, LetterGuess
 
 IMG_FONT = opensans(font_weight=900).imagefont(size=48)
 SQUARE_WIDTH = 64
@@ -20,7 +20,7 @@ class Color(Enum):
     CORRECT = "468c3f"
 
 
-def get_dimensions(guesses: List[List[LetterGuess]]) -> tuple[int, int]:
+def get_dimensions(guesses: list[list[LetterGuess]]) -> tuple[int, int]:
     """Returns dimensions for the image"""
     num_guesses = len(guesses)
 
@@ -46,7 +46,7 @@ def get_color(guess: Guess):
     return tuple(bytes.fromhex(color.value))
 
 
-def get_image_from_guesses(guesses: List[List[LetterGuess]]):
+def get_image_from_guesses(guesses: list[list[LetterGuess]]):
     """Creates image out of list of guesses"""
     (width, height) = get_dimensions(guesses)
     out_img = Image.new("RGBA", (width, height))

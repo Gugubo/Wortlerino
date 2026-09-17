@@ -1,9 +1,10 @@
 """Wordle-Bot for discord"""
 
 import discord
-from image_guesses import get_image_from_guesses
-import wordle
+
 import config
+import wordle
+from image_guesses import get_image_from_guesses
 
 # Discord stuff
 client = discord.Client()
@@ -92,7 +93,7 @@ def parse_message(message):
                 return (
                     True,
                     COLOR_CORRECT,
-                    f"\nCongrats! You guessed right after {len(guesses)} guess{'es' if len(guesses)>1 else ''}.",
+                    f"\nCongrats! You guessed right after {len(guesses)} guess{'es' if len(guesses) > 1 else ''}.",
                     file,
                 )
             else:
