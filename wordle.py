@@ -79,11 +79,11 @@ LETTERS = {
     },
 }
 
-DEFAULT_WORD_LIST = "Wordle"
-DEFAULT_GUESS_LIST = "Wordle-all"
-DEFAULT_ALPHABET = "English"
-DEFAULT_MIN_LENGTH = 4
-DEFAULT_MAX_LENGTH = 6
+DEFAULT_WORD_LIST = getattr(config, "DEFAULT_WORD_LIST", "Wordle")
+DEFAULT_GUESS_LIST = getattr(config, "DEFAULT_GUESS_LIST", "Wordle-all")
+DEFAULT_ALPHABET = getattr(config, "DEFAULT_ALPHABET", "English")
+DEFAULT_MIN_LENGTH = getattr(config, "DEFAULT_MIN_LENGTH", 4)
+DEFAULT_MAX_LENGTH = getattr(config, "DEFAULT_MAX_LENGTH", 6)
 
 
 class WordleState:
@@ -262,15 +262,3 @@ for word_list in WORD_LISTS.values():
         map(str.lower, load_lines("wordLists/" + word_list["filename"]))
     )
 print("wordle.py: All word lists loaded")
-
-# Load optional defaults from config
-if hasattr(config, "DEFAULT_WORD_LIST"):
-    DEFAULT_WORD_LIST = config.DEFAULT_WORD_LIST
-if hasattr(config, "DEFAULT_GUESS_LIST"):
-    DEFAULT_GUESS_LIST = config.DEFAULT_GUESS_LIST
-if hasattr(config, "DEFAULT_ALPHABET"):
-    DEFAULT_ALPHABET = config.DEFAULT_ALPHABET
-if hasattr(config, "DEFAULT_MIN_LENGTH"):
-    DEFAULT_MIN_LENGTH = config.DEFAULT_MIN_LENGTH
-if hasattr(config, "DEFAULT_MAX__LENGTH"):
-    DEFAULT_MAX_LENGTH = config.DEFAULT_MAX_LENGTH
