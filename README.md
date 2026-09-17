@@ -51,12 +51,6 @@ Available settings:
 
 - _Spelunky_: A list of all words that appear in Spelunky 2
 
-## Requirements
-
-```
-pip install -r requirements.txt
-```
-
 ## Running it
 
 1. Create a `config.py` with your token in it, for example:
@@ -65,7 +59,7 @@ pip install -r requirements.txt
 TOKEN = "bFqLkmKnVoo7r1Lbc6S41pK3T0Gm1Vz9ZZUua9Y64TfWDV05Aql5DznwRUx"
 ```
 
-2. Run `wortlerino.py`
+2. Run `uv run wortlerino.py`
 
 ## License
 

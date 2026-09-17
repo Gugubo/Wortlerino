@@ -1,0 +1,9 @@
+[project]
+name = "Wortlerino"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "discord-py==1.7.3",
+    "pillow==12.3.0",
+    "ttf-opensans==2020.10.30",
+]
