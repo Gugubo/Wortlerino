@@ -7,7 +7,10 @@ import wordle
 from image_guesses import get_image_from_guesses
 
 # Discord stuff
-client = discord.Client()
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
 TOKEN = config.TOKEN
 
 # Constants
